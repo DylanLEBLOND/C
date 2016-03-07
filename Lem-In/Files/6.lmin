@@ -1,0 +1,22 @@
+3
+##start
+A 0 0
+B 10 10
+C 20 10
+D 0 10
+# commentaire E 10 -10
+E 10 10
+# commentaire F 20 -10
+F 20 10
+##end
+G 20 0
+# add links
+A-B
+A-D
+A-E
+B-C
+C-D
+C-G
+D-G
+D-E
+E-F

@@ -1,0 +1,32 @@
+20
+##start
+A 0 0
+B 10 10
+C 20 10
+D 10 0
+E 20 0
+F 0 0
+G 0 0
+##end
+H 0 0
+I 0 0
+J 0 0
+K 0 0
+Z 0 0
+M 0 0
+A-B
+A-G
+A-I
+B-C
+C-D
+D-E
+E-F
+E-H
+E-K
+F-H
+G-K
+H-M
+M-Z
+Z-K
+K-J
+J-I

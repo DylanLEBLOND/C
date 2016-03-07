@@ -1,0 +1,31 @@
+50
+##start
+A 0 0
+B 10 10
+# commentaire C 10 -10
+C 10 10
+D 20 20
+E 10 10
+F 0 10
+G 20 10
+H 0 20
+I 10 30
+##end
+J 10 30
+A-B
+A-C
+A-F
+B-D
+B-E
+B-F
+C-F
+C-G
+D-I
+E-H
+E-I
+G-H
+G-J
+H-J
+H-I
+F-H
+I-J

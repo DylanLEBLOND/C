@@ -1,0 +1,39 @@
+2
+##start
+A 0 0
+B 10 10
+C 20 10
+D 10 0
+E 20 0
+# commentaire F 10 -10
+F 10 10
+# commentaire G 20 -10
+G 20 10
+# commentaire H 10 -20
+H 10 20
+# commentaire I 20 -20
+I 20 20
+# commentaire J 40 -30
+J 40 30
+# commentaire K 50 -10
+K 50 10
+##end
+Z 30 10
+A-B
+A-Z
+A-F
+A-D
+B-D
+B-C
+C-E
+D-E
+E-Z
+E-K
+E-F
+F-G
+G-I
+G-H
+H-J
+J-K
+K-E
+K-Z
