@@ -1,114 +1,85 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   aff.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dle-blon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/03/22 18:35:22 by dle-blon          #+#    #+#             */
+/*   Updated: 2016/04/04 19:57:17 by dle-blon         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_ls.h"
- 
-void    ft_affinfo(t_data data)
-{
-    int i;
 
-    ft_putstr("nb = ");
-    ft_putnbr(data.nb);
-    ft_putstr(" | options : ");
-    ft_putstr(data.option);
-    i = -1;
-    ft_putstr("\nnames : ");
-    while (++i < data.nb)
-    {
-        ft_putstr(data.names[i]);
-        if (i < data.nb -1)
-            ft_putstr(" | ");
-        else
-            ft_putendl("");
+void	ft_affinfo(t_data data)
+{
+	int i;
+
+	ft_putstr("nb = ");
+	ft_putnbr(data.nb);
+	ft_putstr(" | options : ");
+	ft_putstr(data.option);
+	i = -1;
+	ft_putstr("\nnames : ");
+	while (++i < data.nb)
+	{
+		ft_putstr(data.names[i]);
+		if (i < data.nb - 1)
+			ft_putstr(" | ");
+		else
+			ft_putendl("");
     }
 }
 
-void    ft_affblock(char *str, char *option)
+void	ft_afftab(char **elem, char *option)
 {
-    /*ft_putstr("[Bstart(str = <");
-    ft_putstr(str);
-    ft_putstr(">)");*/
-    if (str && !option && str[0] != '.')
-        ft_putstr(str);
-    else if (str && option && !ft_strchr(option, 'a') && str[0] != '.')
-        ft_putstr(str);
-    else if (str && option && ft_strchr(option, 'a'))
-        ft_putstr(str);
-    //ft_putstr("Bend]");
+	int		i;
+
+	i = 0;
+	while (option && ft_strchr(option, 'a') && elem[i])
+	{
+		ft_putstr(elem[i]);
+		if (elem[++i] != NULL)
+			ft_putstr("  ");
+		++i;
+	}
+	while (elem[i])
+	{
+		if (elem[i][0] != '.')
+			ft_putstr(elem[i]);
+		if (elem[i + 1] != NULL && elem[i][0] != '.' && elem[i + 1][0] != '.')
+			ft_putstr("  ");
+		++i;
+	}
 }
 
-void    ft_putspace(char **pre, char *next, char *option)
+void	ft_affdefault(char **elem, char *option, int len)
 {
-    if (!pre || !next)
-        return ;
-    *pre--;
-    /*ft_putstr("[Sstart(pre = <");
-    ft_putstr(*pre);
-    ft_putstr("> | next = <");
-    ft_putstr(next);
-    ft_putstr(">)<");*/
-    if (*pre && next && (!option || (option && !ft_strchr(option, 'a')))
-        && *pre[0] != '.' && next[0] != '.')
-        ft_putstr("  ");
-    else if (*pre && next && option && ft_strchr(option, 'a'))
-        ft_putstr("  ");
-    *pre++;
-    /*ft_putstr(">Send(pre = <");
-    ft_putstr(*pre);
-    ft_putstr(">)]");*/
+	int ord;
+
+	if (option == NULL || !ft_strchr(option, 'r'))
+		ord = 1;
+	else 
+		ord = 0;
+	ft_order(elem, ord, len);
+	ft_afftab(elem, option);
 }
 
-void    ft_afftab(char **t1, char  **t2, char *option)
+void	ft_affall(t_data data, char *option, char *name)
 {
-    int cond;
-    int save;
-    int start;
+    int		i;
+    char	**tmp;
 
-    start = 0;
-    while (t1 && t2 && *t1 && *t2)
-    {
-        cond = option && ft_strchr(option, 'r') ? ft_strcmp(*t1, *t2) >= 0
-                                                : ft_strcmp(*t1, *t2) <= 0;
-        if (start++ != 0)
-            ft_putspace(save ? t1 : t2, cond ? *t1 : *t2, option);
-        ft_affblock(cond ? *t1++ : *t2++, option);
-        save = cond;
-    }
-    if (start)
-        ft_putspace(save ? t1 : t2, cond ? *t1 : *t2, option);
-    while (t1 && *t1)
-    {
-        ft_affblock(*t1++, option);
-        ft_putspace(t1, *t1, option);
-    }
-    while (t2 && *t2)
-    {
-        ft_affblock(*t2++, option);
-        ft_putspace(t2, *t2, option);
-    }
-}
-
-void    ft_affdefault(t_data data, char *option)
-{
-    int ord;
-
-    if (option == NULL || !ft_strchr(option, 'r'))
-        ord = 1;
-    else 
-        ord = 0;
-    ft_order(data.names, data.nb, ord);
-    ft_order(data.files, data.nbf, ord);
-    ft_afftab(data.names, data.files, option);
-}
-
-void    ft_affall(t_data data, char *option, char *name)
-{
-    int     i;
-    char    *tmp;
-
-    if (option != NULL && ft_strchr(option, 'R'))
-    {
-        ft_putstr(name);
-        ft_putendl(":");
-    }
-    if (option == NULL || ft_strchr(option, 'a') || ft_strchr(option, 'r'))
-        ft_affdefault(data, option);
-    ft_putendl("");
+	if (!(tmp = ft_fusion(data)))
+		ft_error("Malloc", 1);
+	if (option != NULL && ft_strchr(option, 'R'))
+	{
+		ft_putstr(name);
+		ft_putendl(":");
+	}
+	if (option == NULL || ft_strchr(option, 'a') || ft_strchr(option, 'r'))
+		ft_affdefault(tmp, option, data.nb + data.nbf);
+	ft_putendl("");
+//	ft_free(tmp, data.files);
 }
