@@ -6,7 +6,7 @@
 /*   By: dle-blon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 18:44:10 by dle-blon          #+#    #+#             */
-/*   Updated: 2016/04/04 18:52:04 by dle-blon         ###   ########.fr       */
+/*   Updated: 2016/04/11 13:53:53 by dle-blon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define FT_LS_H
 
 # include <sys/types.h>
+# include <sys/stat.h>
 # include <errno.h>
 # include <stdio.h>
 # include <dirent.h>
@@ -28,7 +29,14 @@ typedef struct	s_data
 	char	*option;
 }				t_data;
 
-typedef struct	dirent t_dir;
+typedef struct	dirent	t_dir;
+typedef struct	stat	t_stat;
+
+typedef struct	s_info
+{
+	char	**names;
+	t_stat	*container;
+}				t_info;
 
 void			ft_order(char **tab, int ord, int len);
 char			**ft_fusion(t_data data);

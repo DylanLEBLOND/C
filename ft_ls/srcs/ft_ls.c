@@ -6,35 +6,41 @@
 /*   By: dle-blon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 18:40:46 by dle-blon          #+#    #+#             */
-/*   Updated: 2016/04/04 20:08:19 by dle-blon         ###   ########.fr       */
+/*   Updated: 2016/04/11 14:39:54 by dle-blon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-t_dir	**ft_getcontain(t_dir **container, t_dir *info, int nb)
+t_info	ft_getcontain(t_info *info, t_dir *buff, int nb, char *name)
 {
 	int		i;
-	t_dir	**tmp;
+	char	*path;
+	t_info	new;
+	t_stat	tmp;
+	
 
-	if (!(tmp = (t_dir**)malloc(sizeof(t_dir *) * (nb + 1))))
+	if (!(new.names = (char **)malloc(sizeof(char *) * (nb + 2))))
+		ft_error("Malloc", 1);
+	if (!(new.container = (t_stat *)malloc(sizeof(t_stat) * (nb + 1))))
+		ft_error("Malloc", 1);
+	if (!(path = ft_strjoin(ft_strjoin(name, "/"), buff->d_name)))
 		ft_error("Malloc", 1);
 	i = -1;
 	while (++i < nb - 1)
 	{
-		tmp[i] = container[i];
-		//if (container[i])
-		//free(container[i]);
+		new.names[i] = info->names[i];
+		new.container[i] = info->container[i];
 	}
-	//if (container)
-	//free(container);
-	tmp[i] = info;
-	//if (info)
-	//free(info);
-	return (tmp);
+	new.names[i] = ft_strdup(buff->d_name);
+	new.names[i + 1] = NULL;
+	if (stat(path, &tmp) == -1)
+		ft_error("Stat", 0);
+	new.container[i] = tmp;
+	return (new);
 }
 
-void	ft_write(char **name, t_dir **container, int dir)
+void	ft_write(char **name, t_info info, int dir)
 {
 	int i;
 	int j;
@@ -42,29 +48,28 @@ void	ft_write(char **name, t_dir **container, int dir)
 
 	i = 0;
 	j = 0;
-	while (container[i])
+	while (info.names[i])
 	{
 		if (dir)
-			bol = container[i]->d_type == DT_DIR;
+			bol = S_ISDIR(info.container[i].st_mode);
 		else
-			bol = container[i]->d_type != DT_DIR;
+			bol = !S_ISDIR(info.container[i].st_mode);
 		if (bol)
-			name[j++] = ft_strdup(container[i]->d_name);
+			name[j++] = ft_strdup(info.names[i]);
 		++i;
 	}
 }
 
-void	ft_config(t_data *data, t_dir **container)
+void	ft_config(t_data *data, t_info info)
 {
 	int i;
 
-	if (!container)
+	if (!info.names)
 		return ;
 	i = 0;
-	ft_init(data, 0);
-	while (container[i])
+	while (info.names[i])
 	{
-		if (container[i]->d_type == DT_DIR)
+		if (S_ISDIR(info.container[i].st_mode))
 			++data->nb;
 		else
 			++data->nbf;
@@ -79,16 +84,17 @@ void	ft_config(t_data *data, t_dir **container)
 		return ;
 	if (data->nbf)
 		data->files[--data->nbf] = NULL;
-	ft_write(data->names, container, 1);
-	ft_write(data->files, container, 0);
+	ft_write(data->names, info, 1);
+	ft_write(data->files, info, 0);
+	return ;
 }
 
 void	ft_loopdir(char *name, char *option)
 {
 	int		i;
 	t_data	tmp;
-	t_dir	*info;
-	t_dir	**container;
+	t_dir	*buff;
+	t_info	info;
 	DIR		*dir;
 
 	if (!(dir = opendir(name)))
@@ -96,18 +102,15 @@ void	ft_loopdir(char *name, char *option)
 	if (!dir)
 		return ;
 	i = 1;
-	container = NULL;
-	while ((info = readdir(dir)))
+	ft_init(&tmp, 0);
+	while ((buff = readdir(dir)))
 	{
-		container = ft_getcontain(container, info, i);
+		info = ft_getcontain(&info, buff, i, name);
 		++i;
 	}
-	ft_config(&tmp, container);
-	if (!tmp.names)
-		ft_putendl("lolololololol");
+	ft_config(&tmp, info);
 	ft_affall(tmp, option, name);
 	ft_norme(name, tmp.names);
-	ft_putendl("IM OUT");
 	if (ft_checkname(tmp.names) && option && ft_strchr(option, 'R'))
 		ft_ls(tmp.names, option, tmp.nb, 0);
 	if (closedir(dir) == -1)

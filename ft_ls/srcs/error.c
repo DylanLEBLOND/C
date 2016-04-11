@@ -6,7 +6,7 @@
 /*   By: dle-blon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 18:40:27 by dle-blon          #+#    #+#             */
-/*   Updated: 2016/04/04 20:02:12 by dle-blon         ###   ########.fr       */
+/*   Updated: 2016/04/11 14:24:03 by dle-blon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ char	**ft_fusion(t_data data)
 		return (NULL);
 	i = -1;
 	while (++i < data.nb)
-		tab[i] = data.names[i];
+		tab[i] = ft_strdup(data.names[i]);
 	j = 0;
 	while (j < data.nbf)
-		tab[i++] = data.files[j++];
+		tab[i++] = ft_strdup(data.files[j++]);
 	tab[i] = NULL;
 	return (tab);
 }

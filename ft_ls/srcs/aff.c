@@ -6,7 +6,7 @@
 /*   By: dle-blon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 18:35:22 by dle-blon          #+#    #+#             */
-/*   Updated: 2016/04/04 19:57:17 by dle-blon         ###   ########.fr       */
+/*   Updated: 2016/04/11 14:07:44 by dle-blon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	ft_afftab(char **elem, char *option)
 	while (option && ft_strchr(option, 'a') && elem[i])
 	{
 		ft_putstr(elem[i]);
-		if (elem[++i] != NULL)
+		if (elem[i + 1] != NULL)
 			ft_putstr("  ");
 		++i;
 	}
@@ -78,7 +78,7 @@ void	ft_affall(t_data data, char *option, char *name)
 		ft_putstr(name);
 		ft_putendl(":");
 	}
-	if (option == NULL || ft_strchr(option, 'a') || ft_strchr(option, 'r'))
+	if (option == NULL || !ft_strchr(option, 'l'))
 		ft_affdefault(tmp, option, data.nb + data.nbf);
 	ft_putendl("");
 //	ft_free(tmp, data.files);

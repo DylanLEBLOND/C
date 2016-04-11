@@ -6,7 +6,7 @@
 /*   By: dle-blon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 18:39:15 by dle-blon          #+#    #+#             */
-/*   Updated: 2016/04/04 20:02:58 by dle-blon         ###   ########.fr       */
+/*   Updated: 2016/04/11 14:27:47 by dle-blon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,21 +48,16 @@ void	ft_norme(char *name, char **directories)
 	char	*tmp;
 
 	i = 0;
-	ft_putendl("IM IN");
 	if (!directories)
 		return ;
 	while (directories[i])
 	{
-		ft_putstr("<i = ");
-		ft_putnbr(i);
-		ft_putendl(">");
 		tmp = ft_strjoin(ft_strjoin(name, "/"), directories[i]);
 		if (directories[i])
 			free(directories[i]);
-		directories[i] = tmp;
+		directories[i] = ft_strdup(tmp);
 		if (tmp)
 			free(tmp);
 		++i;
 	}
-	ft_putendl("IM OUT");
 }
