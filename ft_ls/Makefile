@@ -10,32 +10,46 @@
 #                                                                              #
 #******************************************************************************#
 
-SRCS = 	./srcs/main.c ./srcs/error.c ./srcs/getinfo.c ./srcs/ft_ls.c \
-		./srcs/aff.c ./srcs/check.c ./srcs/arrange.c
+NAME = ft_ls
 
-OBJ = $(SRCS:.c=.o)
+CC = gcc
 
 FLAGS = -Wall -Wextra -Werror
 
-LIB = ./ft_ls.a
+INCLUDES = ./includes
 
-LIBS = $(LIB) ./libft/libft.a
+LIB_INCLUDES = ./libft/includes/
 
-NAME = ft_ls
+SRC = 	main.c error.c getinfo.c ft_ls.c \
+		aff.c check.c arrange.c
+
+SRC_DIR = srcs
+
+SRCS = $(addprefix $(SRC_DIR)/,$(SRC))
+
+OBJ = $(SRCS:.c=.o)
+
+NAME_LIB = ./ft_ls.a
+
+LIBS = $(NAME_LIB) ./libft/libft.a
+
 
 all: $(NAME)
 
+%.o: %.c
+	@$(CC) $(FLAGS) -I $(INCLUDES) -I $(LIB_INCLUDES) -c -o $@ $<
+
 $(NAME): $(OBJ)
 	make -C libft/
-	ar -r $(LIB) $(OBJ)
-	gcc $(FLAGS) $(LIBS) -o $(NAME)
+	@ar -r $(NAME_LIB) $(OBJ)
+	@$(CC) $(FLAGS) $(LIBS) -I $(INCLUDES) -I $(LIB_INCLUDES) -o $(NAME)
 
 clean:
 	make -C libft/ clean
-	rm -rf $(OBJ)
+	@rm -rf $(OBJ) $(NAME_LIB)
 
 fclean: clean
 	make -C libft/ fclean
-	rm -rf $(LIB) $(NAME)
+	@rm -rf $(NAME)
 
 re: fclean all

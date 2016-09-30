@@ -18,7 +18,7 @@
 # include <errno.h>
 # include <stdio.h>
 # include <dirent.h>
-# include "../libft/libft.h"
+# include <libft.h>
 
 typedef struct	s_data
 {
