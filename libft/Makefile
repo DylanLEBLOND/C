@@ -12,42 +12,46 @@
 
 NAME = libft.a
 
-SRCS = 	./srcs/memcpy.c ./srcs/isprint.c ./srcs/isalnum.c ./srcs/isdigit.c \
-		./srcs/isalpha.c ./srcs/isascii.c ./srcs/tolower.c ./srcs/toupper.c \
-		./srcs/atoi.c ./srcs/memcmp.c ./srcs/memchr.c ./srcs/strchr.c \
-		./srcs/strrchr.c ./srcs/strcmp.c ./srcs/strncmp.c ./srcs/strdup.c \
-		./srcs/strcat.c ./srcs/strncat.c ./srcs/strlcat.c ./srcs/strcpy.c \
-		./srcs/strncpy.c ./srcs/strlen.c ./srcs/memalloc.c ./srcs/memdel.c \
-		./srcs/strnew.c ./srcs/strdel.c ./srcs/strclr.c ./srcs/striter.c \
-		./srcs/striteri.c ./srcs/strmap.c ./srcs/strmapi.c ./srcs/strequ.c \
-		./srcs/strnequ.c ./srcs/strsub.c ./srcs/strjoin.c ./srcs/strtrim.c \
-		./srcs/strsplit.c ./srcs/itoa.c ./srcs/putchar.c ./srcs/putchar_fd.c \
-		./srcs/putnbr.c ./srcs/putnbr_fd.c ./srcs/putstr.c ./srcs/putstr_fd.c \
-		./srcs/putendl.c ./srcs/putendl_fd.c ./srcs/bzero.c ./srcs/memmove.c \
-		./srcs/memset.c ./srcs/strstr.c ./srcs/strnstr.c ./srcs/memccpy.c
+CC = gcc
 
-INCLUDES = ./includes
+FLAGS = -Wall -Wextra -Werror
 
-OBJECTS = 	./memcpy.o ./isprint.o ./isalnum.o ./isdigit.o ./isalpha.o \
-			./isascii.o ./tolower.o ./toupper.o ./atoi.o ./memcmp.o ./memchr.o \
-			./strchr.o ./strrchr.o ./strcmp.o ./strncmp.o ./strdup.o \
-			./strcat.o ./strncat.o ./strlcat.o ./strcpy.o ./strncpy.o \
-			./strlen.o ./memalloc.o	./memdel.o ./strnew.o ./strdel.o \
-			./strclr.o ./striter.o	./striteri.o ./strmap.o	./strmapi.o \
-			./strequ.o ./strnequ.o ./strsub.o ./strjoin.o ./strtrim.o \
-			./strsplit.o ./itoa.o ./putchar.o ./putchar_fd.o ./putnbr.o \
-			./putnbr_fd.o ./putstr.o ./putstr_fd.o ./putendl.o ./putendl_fd.o \
-			./bzero.o ./memmove.o ./memset.o ./strstr.o ./strnstr.o ./memccpy.o
+INC = ./includes
+
+SRC = 	converter/atoi.c converter/itoa.c \
+		ctype/isalnum.c ctype/isalpha.c ctype/isascii.c ctype/isdigit.c \
+		ctype/isprint.c ctype/tolower.c ctype/toupper.c \
+		debug/debug.c \
+		memory/bzero.c memory/memalloc.c memory/memccpy.c memory/memchr.c \
+		memory/memcmp.c memory/memcpy.c memory/memmove.c memory/memset.c \
+		memory/memdel.c \
+		print/putchar.c print/putchar_fd.c print/putnbr.c print/putnbr_fd.c \
+		print/putstr.c print/putstr_fd.c print/putendl.c print/putendl_fd.c \
+		string/strcat.c string/strchr.c string/strclr.c string/strcmp.c \
+		string/strcpy.c string/strdel.c string/strdup.c string/strequ.c \
+		string/striter.c string/striteri.c string/strjoin.c string/strlcat.c \
+		string/strlen.c string/strmap.c string/strmapi.c string/strncat.c \
+		string/strncmp.c string/strncpy.c string/strnequ.c string/strnew.c \
+		string/strnstr.c string/strrchr.c string/strsplit.c string/strstr.c \
+		string/strsub.c string/strtrim.c 
+
+SRC_DIR = ./srcs
+
+SRCS = $(addprefix $(SRC_DIR)/,$(SRC))
+
+OBJS = $(SRCS:.c=.o)
 
 all : $(NAME)
 
-$(NAME) : $(FILES)
-	@gcc -Wall -Wextra -Werror -c $(SRCS) -I $(INCLUDES)
-	@ar rc $(NAME) $(OBJECTS)
+%.o: %.c
+	@$(CC) $(FLAGS) -I $(INC) -c -o $@ $<
+
+$(NAME) : $(OBJS)
+	@ar rc $(NAME) $(OBJS)
 	@ranlib $(NAME)
 
 clean :
-	@rm -f $(OBJECTS)
+	@rm -f $(OBJS)
 
 fclean: clean
 	@rm -f $(NAME)
