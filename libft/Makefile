@@ -6,9 +6,11 @@
 #    By: dle-blon <dle-blon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/12 15:36:21 by dle-blon          #+#    #+#              #
-#    Updated: 2015/06/02 18:49:58 by dle-blon         ###   ########.fr        #
+#    Updated: 2016/10/27 22:04:15 by dle-blon         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
+
+PROJECT_NAME = libft
 
 NAME = libft.a
 
@@ -41,14 +43,28 @@ SRCS = $(addprefix $(SRC_DIR)/,$(SRC))
 
 OBJS = $(SRCS:.c=.o)
 
-all : $(NAME)
+WHITE =		\033[37;01m
+RED =		\033[31;01m
+GREEN =		\033[32;01m
+YELLOW =	\033[33;01m
+BLUE =		\033[34;01m
+BASIC =		\033[0m
 
-%.o: %.c
+all : info  $(NAME)
+
+info :
+	@echo "$(WHITE) Project: $(BASIC) $(PROJECT_NAME)"
+	@echo "$(WHITE) Flags: $(BASIC) $(FLAGS)"
+	@echo "$(WHITE) Compiler: $(BASIC) $(CC)"
+
+%.o : %.c
 	@$(CC) $(FLAGS) -I $(INC) -c -o $@ $<
+	@echo "$(BLUE) $< $(WHITE)->$(RED) $@ $(BASIC)"
 
 $(NAME) : $(OBJS)
 	@ar rc $(NAME) $(OBJS)
 	@ranlib $(NAME)
+	@echo "$(BLUE) objs $(WHITE)->$(RED) $@ $(BASIC)"
 
 clean :
 	@rm -f $(OBJS)
