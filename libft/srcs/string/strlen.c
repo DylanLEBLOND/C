@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-size_t	ft_strlen(cpchar s)
+size_t	ft_strlen(t_cpchar s)
 {
 	size_t	i;
 

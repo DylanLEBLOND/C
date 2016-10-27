@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-char	*ft_strmapi(cpchar s, char (*f)(unsigned int, char))
+char	*ft_strmapi(t_cpchar s, char (*f)(unsigned int, char))
 {
 	char			*new_str;
 	unsigned int	i;

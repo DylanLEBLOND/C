@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-static char	*ft_strnul(cpchar s1, cpchar s2)
+static char	*ft_strnul(t_cpchar s1, t_cpchar s2)
 {
 	if (s1 && !s2)
 		return (ft_strdup(s1));
@@ -21,7 +21,7 @@ static char	*ft_strnul(cpchar s1, cpchar s2)
 	return (NULL);
 }
 
-char		*ft_strjoin(cpchar s1, cpchar s2)
+char		*ft_strjoin(t_cpchar s1, t_cpchar s2)
 {
 	int		len;
 	int		i;

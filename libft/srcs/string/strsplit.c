@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-static int	ft_compt(cpchar s, char c)
+static int	ft_compt(t_cpchar s, char c)
 {
 	int	i;
 	int	cmp;
@@ -37,14 +37,14 @@ static int	ft_compt(cpchar s, char c)
 	return (cmp);
 }
 
-static int	ft_uselesslikehell(cpchar s, int j, char c)
+static int	ft_uselesslikehell(t_cpchar s, int j, char c)
 {
 	while (s[j] && s[j] == c)
 		j++;
 	return (j);
 }
 
-static char	**ft_strone(cpchar s, int cmp, char c)
+static char	**ft_strone(t_cpchar s, int cmp, char c)
 {
 	char	**tab;
 	int		i;
@@ -73,7 +73,7 @@ static char	**ft_strone(cpchar s, int cmp, char c)
 	return (tab);
 }
 
-static char	**ft_cmpone(cpchar s, int cmp, char c)
+static char	**ft_cmpone(t_cpchar s, int cmp, char c)
 {
 	int	i;
 
@@ -86,7 +86,7 @@ static char	**ft_cmpone(cpchar s, int cmp, char c)
 		return (ft_strone(s, cmp, c));
 }
 
-char		**ft_strsplit(cpchar s, char c)
+char		**ft_strsplit(t_cpchar s, char c)
 {
 	int		cmp;
 

@@ -6,17 +6,17 @@
 /*   By: dle-blon <dle-blon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/12 07:51:28 by dle-blon          #+#    #+#             */
-/*   Updated: 2014/11/12 07:51:51 by dle-blon         ###   ########.fr       */
+/*   Updated: 2016/10/27 21:04:37 by dle-blon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_strequ(cpchar s1, cpchar s2)
+int		ft_strequ(t_cpchar s1, t_cpchar s2)
 {
 	if (s1 && s2)
 	{
-		if (!ft_strcmp((cpchar )s1, (cpchar )s2))
+		if (!ft_strcmp((t_cpchar)s1, (t_cpchar)s2))
 			return (1);
 	}
 	return (0);

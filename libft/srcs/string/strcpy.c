@@ -6,13 +6,13 @@
 /*   By: dle-blon <dle-blon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/11 18:33:52 by dle-blon          #+#    #+#             */
-/*   Updated: 2014/11/11 18:34:07 by dle-blon         ###   ########.fr       */
+/*   Updated: 2016/10/27 21:04:00 by dle-blon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strcpy(char *dest, cpchar src)
+char	*ft_strcpy(char *dest, t_cpchar src)
 {
 	int i;
 

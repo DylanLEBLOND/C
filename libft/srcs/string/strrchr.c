@@ -12,27 +12,27 @@
 
 #include "libft.h"
 
-char	*ft_strrchr(cpchar s, int c)
+char	*ft_strrchr(t_cpchar s, int c)
 {
 	int i;
-	int cpt;
+	int t_cpt;
 
 	i = 0;
-	cpt = 0;
+	t_cpt = 0;
 	while (s[i])
 	{
 		if (s[i] == c)
-			cpt++;
+			t_cpt++;
 		i++;
 	}
-	if (cpt == 0 && c == 0)
+	if (t_cpt == 0 && c == 0)
 		return ((char *)(s + i));
-	else if (cpt == 0)
+	else if (t_cpt == 0)
 		return (NULL);
-	while (*s && cpt > 0)
+	while (*s && t_cpt > 0)
 	{
 		if (*s == c)
-			cpt--;
+			t_cpt--;
 		s++;
 	}
 	return ((char *)(s - 1));

@@ -17,7 +17,7 @@ static int	ft_is_blank(char c)
 	return (c == ' ' || c == '\t' || c == '\n');
 }
 
-char		*ft_strtrim(cpchar s)
+char		*ft_strtrim(t_cpchar s)
 {
 	char	*new_str;
 	size_t	i;

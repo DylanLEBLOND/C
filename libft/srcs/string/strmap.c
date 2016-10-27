@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-char		*ft_strmap(cpchar s, char (*f)(char))
+char		*ft_strmap(t_cpchar s, char (*f)(char))
 {
 	char	*new_str;
 	int		i;

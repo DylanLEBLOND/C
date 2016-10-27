@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-char	*ft_strsub(cpchar s, unsigned int start, size_t size)
+char	*ft_strsub(t_cpchar s, unsigned int start, size_t size)
 {
 	char	*str;
 	size_t	i;

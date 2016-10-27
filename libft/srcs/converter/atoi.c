@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-int			ft_atoi(cpchar str)
+int			ft_atoi(t_cpchar str)
 {
 	int i;
 	int nb;

@@ -6,13 +6,13 @@
 /*   By: dle-blon <dle-blon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/12 16:27:00 by dle-blon          #+#    #+#             */
-/*   Updated: 2014/11/12 17:59:39 by dle-blon         ###   ########.fr       */
+/*   Updated: 2016/10/27 21:02:50 by dle-blon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memccpy(void *dest, cpvoid src, int c, size_t n)
+void	*ft_memccpy(void *dest, t_cpvoid src, int c, size_t n)
 {
 	char	*tmp_d;
 	char	*tmp_s;

@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-int	ft_strncmp(cpchar str1, cpchar str2, size_t n)
+int	ft_strncmp(t_cpchar str1, t_cpchar str2, size_t n)
 {
 	size_t	i;
 	size_t	j;

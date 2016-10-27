@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-char	*ft_strstr(cpchar str1, cpchar str2)
+char	*ft_strstr(t_cpchar str1, t_cpchar str2)
 {
 	int		i;
 	int		j;
