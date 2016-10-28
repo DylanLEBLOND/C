@@ -6,11 +6,12 @@
 /*   By: dle-blon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 18:40:46 by dle-blon          #+#    #+#             */
-/*   Updated: 2016/04/11 14:39:54 by dle-blon         ###   ########.fr       */
+/*   Updated: 2016/10/28 12:58:50 by dle-blon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
+#include <libft.h>
 
 t_info	ft_getcontain(t_info *info, t_dir *buff, int nb, char *name)
 {

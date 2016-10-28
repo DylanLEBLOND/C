@@ -6,11 +6,11 @@
 /*   By: dle-blon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 18:38:37 by dle-blon          #+#    #+#             */
-/*   Updated: 2016/04/04 18:51:52 by dle-blon         ###   ########.fr       */
+/*   Updated: 2016/10/28 12:57:29 by dle-blon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_ls.h>
+#include <libft.h>
 
 void	ft_order(char **tab, int ord, int len)
 {

@@ -6,7 +6,7 @@
 #    By: dle-blon <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/03/22 19:20:53 by dle-blon          #+#    #+#              #
-#    Updated: 2016/10/27 21:37:54 by dle-blon         ###   ########.fr        #
+#    Updated: 2016/10/28 17:26:40 by dle-blon         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -16,7 +16,9 @@ CC = gcc
 
 FLAGS = -Wall -Wextra -Werror
 
-INC = -I ./includes -I ./libft/includes/
+INC = -I ./includes -I ./libft/includes
+
+LIBS = libft/libft.a
 
 SRC = 	main.c error.c getinfo.c ft_ls.c aff.c check.c arrange.c
 
@@ -26,21 +28,42 @@ SRCS = $(addprefix $(SRC_DIR)/,$(SRC))
 
 OBJS = $(SRCS:.c=.o)
 
-all: $(NAME)
+WHITE =     \033[37;01m
+RED =       \033[31;01m
+GREEN =     \033[32;01m
+YELLOW =    \033[33;01m
+BLUE =      \033[34;01m
+BASIC =     \033[0m
 
-%.o: %.c
+.PHONY: all clean fclean re
+
+all : info $(NAME)
+
+info :
+	@if (! (test -e $(NAME) &&  test -e srcs/main.o));		\
+	then													\
+		echo "$(WHITE) Project: $(BASIC) $(NAME)";			\
+		echo "$(WHITE) Flags: $(BASIC) $(FLAGS)";			\
+		echo "$(WHITE) Compiler: $(BASIC) $(CC)";			\
+	fi
+
+%.o : %.c
 	@$(CC) $(FLAGS) $(INC) -c -o $@ $<
+	@echo "$(BLUE) $< $(WHITE)->$(RED) $@ $(BASIC)"
 
 $(NAME): $(OBJS)
-	make -C libft/
-	$(CC) $(FLAGS) $(LIBS) $(INC) $(OBJS) -o $(NAME)
+	@echo "$(GREEN) ***** Make libft Begin ***** $(BASIC)"
+	@make -C libft/
+	@echo "$(GREEN) ***** Make libft End ***** $(BASIC)"
+	@$(CC) $(FLAGS) $(LIBS) $(INC) $(OBJS) -o $(NAME)
+	@echo "$(BLUE) objs $(WHITE)->$(RED) $@ $(BASIC)"
 
 clean:
-	make -C libft/ clean
-	rm -rf $(OBJ)
+	@make -C libft/ clean
+	@rm -rf $(OBJS)
 
 fclean: clean
-	make -C libft/ fclean
-	rm -rf $(NAME)
+	@make -C libft/ fclean
+	@rm -rf $(NAME)
 
 re: fclean all

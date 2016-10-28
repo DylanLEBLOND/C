@@ -6,11 +6,12 @@
 /*   By: dle-blon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 18:45:11 by dle-blon          #+#    #+#             */
-/*   Updated: 2016/03/22 18:46:13 by dle-blon         ###   ########.fr       */
+/*   Updated: 2016/10/28 17:47:27 by dle-blon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
+#include <libft.h>
 
 void	ft_init(t_data *data, int max)
 {
@@ -18,7 +19,7 @@ void	ft_init(t_data *data, int max)
 	data->nbf = 0;
 	if (max)
 	{
-		if (!(data->names = (char **)malloc(sizeof(char *) * max)))
+		if (!(data->names = (char **)malloc(sizeof (char *) * max)))
 			ft_error("Malloc: ", 1);
 		data->names[max - 1] = NULL;
 	}
@@ -42,25 +43,12 @@ void	ft_getoptions(t_data *data, char *name)
 	char	c;
 	char	*tmp;
 
+	tmp = ft_remove_dash (name);
+	if (tmp == NULL)
+		;//Invalid Option
+	if (!
+
 	if (!data->option)
-		data->option = ft_strdup(++name);
-	else
 	{
-		i = 1;
-		while ((c = name[i]))
-		{
-			if (!ft_strchr(data->option, c))
-			{
-				tmp = ft_strjoin(data->option, &c);
-				//if (data->option)
-				//free(data->option);
-				data->option = ft_strdup(tmp);
-			}
-			++i;
-		}
-		//if (tmp)
-		//free(tmp);
-	}
-	if (!data->option)
-		ft_error("Malloc", 1);
+
 }

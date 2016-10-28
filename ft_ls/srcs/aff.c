@@ -6,11 +6,12 @@
 /*   By: dle-blon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 18:35:22 by dle-blon          #+#    #+#             */
-/*   Updated: 2016/04/11 14:07:44 by dle-blon         ###   ########.fr       */
+/*   Updated: 2016/10/28 12:56:52 by dle-blon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
+#include <libft.h>
 
 void	ft_affinfo(t_data data)
 {

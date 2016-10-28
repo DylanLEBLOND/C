@@ -6,11 +6,12 @@
 /*   By: dle-blon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 18:39:15 by dle-blon          #+#    #+#             */
-/*   Updated: 2016/04/11 14:27:47 by dle-blon         ###   ########.fr       */
+/*   Updated: 2016/10/28 12:58:01 by dle-blon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
+#include <libft.h>
 
 int		ft_checkcurrent(char *name)
 {

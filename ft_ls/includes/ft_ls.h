@@ -6,7 +6,7 @@
 /*   By: dle-blon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 18:44:10 by dle-blon          #+#    #+#             */
-/*   Updated: 2016/04/11 13:53:53 by dle-blon         ###   ########.fr       */
+/*   Updated: 2016/10/28 13:00:18 by dle-blon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,8 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <errno.h>
-# include <stdio.h>
 # include <dirent.h>
-# include <libft.h>
+# include <stdio.h>
 
 typedef struct	s_data
 {

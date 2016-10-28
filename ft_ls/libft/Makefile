@@ -6,7 +6,7 @@
 #    By: dle-blon <dle-blon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/12 15:36:21 by dle-blon          #+#    #+#              #
-#    Updated: 2016/10/27 22:04:15 by dle-blon         ###   ########.fr        #
+#    Updated: 2016/10/28 17:25:41 by dle-blon         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -18,7 +18,7 @@ CC = gcc
 
 FLAGS = -Wall -Wextra -Werror
 
-INC = ./includes
+INC = -I ./includes
 
 SRC = 	converter/atoi.c converter/itoa.c \
 		ctype/isalnum.c ctype/isalpha.c ctype/isascii.c ctype/isdigit.c \
@@ -50,21 +50,26 @@ YELLOW =	\033[33;01m
 BLUE =		\033[34;01m
 BASIC =		\033[0m
 
-all : info  $(NAME)
+.PHONY: all clean fclean re
+
+all : info $(NAME)
 
 info :
-	@echo "$(WHITE) Project: $(BASIC) $(PROJECT_NAME)"
-	@echo "$(WHITE) Flags: $(BASIC) $(FLAGS)"
-	@echo "$(WHITE) Compiler: $(BASIC) $(CC)"
+	@if (! (test -e $(NAME) && test -e srcs/debug/debug.o));			\
+	then																\
+		echo "$(WHITE) Project: $(BASIC) $(PROJECT_NAME)";				\
+		echo "$(WHITE) Flags: $(BASIC) $(FLAGS)";						\
+		echo "$(WHITE) Compiler: $(BASIC) $(CC)";						\
+	fi
 
 %.o : %.c
-	@$(CC) $(FLAGS) -I $(INC) -c -o $@ $<
+	@$(CC) $(FLAGS) $(INC) -c -o $@ $<
 	@echo "$(BLUE) $< $(WHITE)->$(RED) $@ $(BASIC)"
 
 $(NAME) : $(OBJS)
-	@ar rc $(NAME) $(OBJS)
+	@ar -rcs $(NAME) $(OBJS)
 	@ranlib $(NAME)
-	@echo "$(BLUE) objs $(WHITE)->$(RED) $@ $(BASIC)"
+	@echo "$(BLUE) objs $(WHITE)->$(RED) $(NAME) $(BASIC)"
 
 clean :
 	@rm -f $(OBJS)

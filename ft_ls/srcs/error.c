@@ -6,11 +6,12 @@
 /*   By: dle-blon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 18:40:27 by dle-blon          #+#    #+#             */
-/*   Updated: 2016/04/11 14:24:03 by dle-blon         ###   ########.fr       */
+/*   Updated: 2016/10/28 12:58:35 by dle-blon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
+#include <libft.h>
 
 char	**ft_fusion(t_data data)
 {
