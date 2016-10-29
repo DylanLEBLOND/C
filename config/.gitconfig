@@ -1,0 +1,20 @@
+[format]
+	pretty = format:%C(bold yellow)%h %C(bold green)%<(7)%aN%C(bold red)%d %C(bold blue)%ci%x08%x08%x08%x08%x08%x08 %Creset%s
+[color]
+	ui = true
+[alias]
+	st = status
+	co = checkout
+	addm = add -u; git status
+	addn = add .; git status
+	graph = log --graph --decorate --all
+	gr = log --graph --decorate
+	amend = commit --amend
+[user]
+	name = Dylan
+	email = leblondylan@hotmail.com
+[credential]
+	helper = cache
+[core]
+	excludesfile = /home/Dylan/.gitignore_global
+	editor = emacs
