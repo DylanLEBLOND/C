@@ -5,14 +5,17 @@
 [alias]
 	st = status
 	co = checkout
+	cm = commit -m
 	addm = !git add -u && git status
 	addn = !git add . && git status
 	graph = log --graph --decorate --all
 	gr = log --graph --decorate
 	amend = commit --amend
+	f = fetch --all --prune
 	sync = !git fetch --all --prune && git graph
-	pm = push origin master
-	pn = push origin next
+	ps = push
+	psm = push origin master
+	psn = push origin next
 [push]
 	default = upstream
 [user]
