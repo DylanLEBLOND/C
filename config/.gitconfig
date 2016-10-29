@@ -5,8 +5,8 @@
 [alias]
 	st = status
 	co = checkout
-	addm = add -u; git status
-	addn = add .; git status
+	addm = !git add -u && git status
+	addn = !git add . && git status
 	graph = log --graph --decorate --all
 	gr = log --graph --decorate
 	amend = commit --amend
