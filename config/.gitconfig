@@ -10,6 +10,9 @@
 	graph = log --graph --decorate --all
 	gr = log --graph --decorate
 	amend = commit --amend
+	sync = !git fetch --all --prune && git graph
+	pm = push origin master
+	pn = push origin next
 [user]
 	name = Dylan
 	email = leblondylan@hotmail.com
