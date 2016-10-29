@@ -13,6 +13,8 @@
 	sync = !git fetch --all --prune && git graph
 	pm = push origin master
 	pn = push origin next
+[push]
+	default = upstream
 [user]
 	name = Dylan
 	email = leblondylan@hotmail.com
