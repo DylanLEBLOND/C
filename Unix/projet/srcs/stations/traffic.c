@@ -6,26 +6,23 @@
 /*   By: dle-blon <dle-blon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 20:47:14 by dle-blon          #+#    #+#             */
-/*   Updated: 2016/09/30 15:21:01 by dle-blon         ###   ########.fr       */
+/*   Updated: 2016/11/03 15:21:01 by dle-blon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <function.h>
+#include <polling.h>
 
-int station_index;
-int station_pid;
-int delai_min;
-int delai_max;
-
-void receive_data_signal (int signal)
-{
-	//TEMP
-	(void)signal;
-}
 
 int main (int ac, char **av)
 {
-	int i;
+	int station_pid ;
+	int delai_moyen;
+	int delai_min;
+	int delai_max;
+	int station_index;
+	time_t tick;
+	time_t tock;
 
 	if (ac != 5)
 		basic_error ("invalid parameters numbers trafic\n");
@@ -49,12 +46,17 @@ int main (int ac, char **av)
 	if (delai_max < delai_min)
 		basic_error ("delai max < delai min\n");
 
-//	signal (POLL_RX, &(receive_data_signal));
-
-	for (i = 0; i< 60; i++)
+	srand (time(NULL));
+	delai_moyen = rand() % (delai_max - delai_min + 1) + delai_min;
+	
+	while (TRUE)
 	{
-		printf ("trafic i %d pid_Sti %d delai_min_requete %d delai_max_requete %d\n", station_index, station_pid, delai_min, delai_max);
-		sleep (1);
+		time (&tick);
+		do
+		{
+			time (&tock);
+		} while (difftime(tock, tick) < delai_moyen);
+		kill (station_pid, DATA_REQ_TX);
 	}
 
 	return 0;

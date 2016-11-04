@@ -1,27 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dle-blon <dle-blon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 20:47:14 by dle-blon          #+#    #+#             */
-/*   Updated: 2016/09/30 10:03:53 by dle-blon         ###   ########.fr       */
+/*   Updated: 2016/09/30 15:17:47 by dle-blon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <function.h>
 
-void	basic_error (char *str)
+void	ft_fill_tab (char *str, int length)
 {
-	if (str)
-		ft_putstr_fd (str, 2);
-	exit (EXIT_FAILURE);
+	int i;
+	
+	i = 0;
+	while (i < length - 1)
+		str[i++] = '\t';
+	str[i] = '\0';
 }
 
-void	fatal_error (char *str)
+void	ft_putstr (char const *s, int eol)
 {
-	if (str)
-		perror (str);
-	exit (EXIT_FAILURE);
+	int i;
+
+	if (s)
+	{
+		i = 0;
+		while (s[i] != '\0')
+			write (1, &s[i++], 1);
+		if (eol)
+			write (1, "\n", 1);
+	}
+}
+
+void	ft_putstr_fd (char const *s, int fd)
+{
+	int i;
+
+	if (s)
+	{
+		i = 0;
+		while (s[i] != '\0')
+			write (fd, &s[i++], 1);
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: dle-blon <dle-blon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 20:47:14 by dle-blon          #+#    #+#             */
-/*   Updated: 2016/09/30 15:23:59 by dle-blon         ###   ########.fr       */
+/*   Updated: 2016/11/03 15:23:59 by dle-blon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ int main (int ac, char **av)
 {
 	t_parameters parameters;
 	pid_t pid_primary;
-	int i;
 
 	if (ac != 9 && ac != 10)
 		basic_error ("invalid parameters numbers\n");
@@ -78,15 +77,6 @@ int main (int ac, char **av)
 	pid_primary = fork ();
 	if (pid_primary == 0)
 		ft_primary_management (&parameters);
-
-	for (i = 0; i < 60; i++)
-	{
-		printf ("poll_config primaire %s secondaire %s trafic %s n %d nb_polling %d delai_polling %d delai_min_requete %d delai_max_requete %d", parameters.primaire_str, parameters.secondaire_str, parameters.trafic_str, parameters.station_count, parameters.polling_count, parameters.polling_delay, parameters.delay_min, parameters.delay_max);
-		if (ac == 10)
-			printf (" [prefixe_fichier %s]", parameters.file_name);
-		printf ("\n");
-		sleep (1);
-	}
 
 	waitpid (pid_primary, NULL, 0);
 

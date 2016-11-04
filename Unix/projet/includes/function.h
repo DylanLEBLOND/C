@@ -21,7 +21,11 @@
 # include <sys/types.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+# include <time.h>
 
+# define bool	char
+# define TRUE	1
+# define FALSE	0
 
 typedef struct	s_parameters
 {
@@ -60,6 +64,7 @@ void			ft_putstr_fd (char const *s, int fd);
 
 /* string functions */
 char			*ft_itoa (int n);
+void			ft_fill_tab (char *str, int length);
 
 /* interfaces function */
 void 			ft_primary_management (t_parameters *parameters);

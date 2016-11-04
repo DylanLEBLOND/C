@@ -28,7 +28,7 @@ void ft_primary_management (t_parameters *parameters)
 		if (secondary_pids[i] < 0)
 			fatal_error ("fork failed");
 		if (secondary_pids[i] == 0)
-			ft_secondary_management (parameters, i);
+			ft_secondary_management (parameters, i + 1);
 	}
 
 	primary_parameters = (char **)malloc(sizeof (char *) * (5 + parameters->station_count));
