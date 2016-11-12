@@ -16,6 +16,8 @@
 int pid_primaire;
 int station_nb;
 char *tab_st;
+char *filename;
+char message[40];
 int nb_data_req_rx = 0;
 int state = IDLE;
 
@@ -25,24 +27,28 @@ int state = IDLE;
 void emitting_data_request_signal (int signum)
 {
 	(void)signum;
-	
+
 	nb_data_req_rx++;
 	kill (-2, DATA_REQ_TX);
 	switch (state)
 	{
 		case IDLE:
-			printf ("%sSt%d %s Data_Req_Rx %d\n", tab_st, station_nb, string_idle, nb_data_req_rx);
+			sprintf (message, "%sSt%d %s Data_Req_Rx %d\n", tab_st, station_nb, string_idle, nb_data_req_rx);
+			print_message (message, filename);
 			state = W_POLL;
-			printf ("%sSt%d %s Attente\n", tab_st, station_nb, string_w_poll);
+			sprintf (message, "%sSt%d %s Attente\n", tab_st, station_nb, string_w_poll);
 			break;
 		case W_POLL:
-			printf ("%sSt%d %s Data_Req_Rx %d\n", tab_st, station_nb, string_w_poll, nb_data_req_rx);
+			sprintf (message, "%sSt%d %s Data_Req_Rx %d\n", tab_st, station_nb, string_w_poll, nb_data_req_rx);
+			print_message (message, filename);
 			break;
 		case SD_DATA:
-			printf ("%sSt%d %s Data_Req_Rx %d\n", tab_st, station_nb, string_sd_data, nb_data_req_rx);
+			sprintf (message, "%sSt%d %s Data_Req_Rx %d\n", tab_st, station_nb, string_sd_data, nb_data_req_rx);
+			print_message (message, filename);
 			break;
 		case W_ACK:
-			printf ("%sSt%d %s Data_Req_Rx %d\n", tab_st, station_nb, string_w_ack, nb_data_req_rx);
+			sprintf (message, "%sSt%d %s Data_Req_Rx %d\n", tab_st, station_nb, string_w_ack, nb_data_req_rx);
+			print_message (message, filename);
 			break;
 		default:		/* should never occur */
 			break;
@@ -55,18 +61,21 @@ void emitting_data_request_signal (int signum)
 void emitting_data_signal (int signum)
 {
 	(void)signum;
-	
+
 	switch (state)
 	{
 		case W_POLL:
 			if (nb_data_req_rx > 0)
 			{
-				printf ("%sSt%d %s Poll_Rx\n", tab_st, station_nb, string_w_poll);
+				sprintf (message, "%sSt%d %s Poll_Rx\n", tab_st, station_nb, string_w_poll);
+				print_message (message, filename);
 				kill (pid_primaire, DATA_TX);
 				state = SD_DATA;
-				printf ("%sSt%d %s\n", tab_st, station_nb, string_sd_data);
+				sprintf (message, "%sSt%d %s\n", tab_st, station_nb, string_sd_data);
+				print_message (message, filename);
 				state = ACK_RX;
-				printf ("%sSt%d %s\n", tab_st, station_nb, string_w_ack);
+				sprintf (message, "%sSt%d %s\n", tab_st, station_nb, string_w_ack);
+				print_message (message, filename);
 			}
 		default:
 			break;
@@ -79,21 +88,24 @@ void emitting_data_signal (int signum)
 void acknoledge_signal (int signum)
 {
 	(void)signum;
-	
+
 	switch (state)
 	{
 		case ACK_RX:
 			nb_data_req_rx--;
-			printf ("%sSt%d %s Ack_Rx %d\n", tab_st, station_nb, string_sd_data, nb_data_req_rx);
+			sprintf (message, "%sSt%d %s Ack_Rx %d\n", tab_st, station_nb, string_sd_data, nb_data_req_rx);
+			print_message (message, filename);
 			if (nb_data_req_rx > 0)
 			{
 				state = W_POLL;
-				printf ("%sSt%d %s Attente\n", tab_st, station_nb, string_w_poll);
+				sprintf (message, "%sSt%d %s Attente\n", tab_st, station_nb, string_w_poll);
+				print_message (message, filename);
 			}
 			else
 			{
 				state = IDLE;
-				printf ("%sSt%d %s\n", tab_st, station_nb, string_idle);
+				sprintf (message, "%sSt%d %s\n", tab_st, station_nb, string_idle);
+				print_message (message, filename);
 			}
 			break;
 		default:
@@ -111,10 +123,12 @@ void receive_data_signal (int signum)
 	switch (state)
 	{
 		case IDLE:
-			printf ("%sSt%d %s Data_Rx\n", tab_st, station_nb, string_idle);
+			sprintf (message, "%sSt%d %s Data_Rx\n", tab_st, station_nb, string_idle);
+			print_message (message, filename);
 			break;
 		case W_POLL:
-			printf ("%sSt%d %s Data_Rx\n", tab_st, station_nb, string_w_poll);
+			sprintf (message, "%sSt%d %s Data_Rx\n", tab_st, station_nb, string_w_poll);
+			print_message (message, filename);
 			break;
 		default:		/* should never occur */
 			break;
@@ -123,12 +137,13 @@ void receive_data_signal (int signum)
 
 int main (int ac, char **av)
 {
+	int length;
 	struct sigaction data_req_action;
 	struct sigaction poll_action;
 	struct sigaction ack_action;
 	struct sigaction data_action;
 
-	if (ac != 3)
+	if (ac < 3 || ac > 4)
 		basic_error ("invalid parameters numbers secondaire\n");
 
 	station_nb = atoi (av[1]);
@@ -142,14 +157,38 @@ int main (int ac, char **av)
 	tab_st = (char *)malloc(sizeof(char) * (3 * station_nb + 1));
 	if (tab_st == NULL)
 		fatal_error ("malloc failed\n");
-	
+
 	tab_st = memset (tab_st, 0, sizeof(char) * (3 * station_nb + 1));
 	if (tab_st == NULL)
 		fatal_error ("memset failed\n");
 	ft_fill_tab (tab_st, 3 * station_nb + 1);
 
-	printf ("%sSt%d %s\n", tab_st, station_nb, string_idle);
-	
+	filename = NULL;
+	if (ac == 4)
+	{
+		length = strlen (av[ac - 1]) + 5;
+		filename = (char *)malloc(sizeof(char) * length);
+		if (filename == NULL)
+			fatal_error ("strdup failed\n");
+
+		filename = strcpy (filename, av[ac - 1]);
+		if (filename == NULL)
+			fatal_error ("strcpy failed\n");
+
+		filename = strcat (filename, "_st");
+		if (filename == NULL)
+			fatal_error ("strcat failed\n");
+
+		filename = strcat (filename, ft_itoa (station_nb));
+		if (filename == NULL)
+			fatal_error ("itoa failed\n");
+
+		filename[length - 1] = '\0';
+	}
+
+	sprintf (message, "%sSt%d %s\n", tab_st, station_nb, string_idle);
+	print_message (message, filename);
+
 	data_req_action.sa_handler = emitting_data_request_signal;
 	data_req_action.sa_flags = 0;
 	sigaction (DATA_REQ_RX, &data_req_action, NULL);

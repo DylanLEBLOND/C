@@ -61,6 +61,7 @@ void			fatal_error (char *str);
 /* print functions */
 void			ft_putstr (char const *s, int eol);
 void			ft_putstr_fd (char const *s, int fd);
+void			print_message (char *mess, char *filename);
 
 /* string functions */
 char			*ft_itoa (int n);

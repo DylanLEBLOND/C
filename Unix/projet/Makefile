@@ -21,7 +21,7 @@ FLAGS = -Wall -Wextra -Werror
 
 INC = -I ./includes
 
-SRC_COMMON = common/error.c common/print.c common/ft_itoa.c
+SRC_COMMON = common/error.c common/print.c common/string.c
 SRC_PRIMARY = stations/primary_station.c
 SRC_SECONDARY = stations/secondary_station.c
 SRC_TRAFFIC = stations/traffic.c

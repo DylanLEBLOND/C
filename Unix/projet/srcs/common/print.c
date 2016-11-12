@@ -12,14 +12,27 @@
 
 #include <function.h>
 
-void	ft_fill_tab (char *str, int length)
+void	print_message (char *mess, char *filename)
 {
-	int i;
-	
-	i = 0;
-	while (i < length - 1)
-		str[i++] = '\t';
-	str[i] = '\0';
+	FILE *file;
+	int res;
+
+	if (filename == NULL)
+	{
+		printf ("%s", mess);
+		return ;
+	}
+
+	file = NULL;
+	file = fopen (filename, "a");
+	if (file == NULL)
+		fatal_error ("fopen failed");
+
+	res = fputs (mess, file);
+	fclose (file);
+
+	if (res < 0)
+		fatal_error ("fputs failed");
 }
 
 void	ft_putstr (char const *s, int eol)
