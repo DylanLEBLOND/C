@@ -1,28 +1,33 @@
-#include <stdio.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <errno.h>
+# include <dirent.h>
+
+typedef struct  dirent  t_dir;
+typedef struct  stat    t_stat;
 
 int main(void)
 {
-    int i = 0;
-    int j, tmp;
-    int tab[8] = {10, 15, 5, 3, 7 , 3, 0, 20};
-    
-    while (i < 8)
-    {
-        j = 7;
-        while (j > i)
-        {
-            if (tab[i] > tab[j])
-            {
-                tmp = tab[i];
-                tab[i] = tab[j];
-                tab[j] = tmp;
-            }
-            --j;    
-        }
-        ++i;
-    }
-    j = -1;
-    while (++j < 8)
-        printf("tab[%d] = %d\n", j, tab[j]);
+	DIR		*dir;
+	t_dir	*buff;
+
+	if (!(dir = opendir("srcs")))
+	{
+		printf ("FAILED 1\n");
+		exit (0);
+	}
+	if (!dir)
+	{
+		printf ("FAILED 2\n");
+		exit (0);
+	}
+	
+	while ((buff = readdir(dir)))
+	{
+		printf ("dir name = %s\n", buff->d_name);
+	}
+
     return (0);
 }

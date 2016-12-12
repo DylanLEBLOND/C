@@ -6,7 +6,7 @@
 /*   By: dle-blon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 18:44:10 by dle-blon          #+#    #+#             */
-/*   Updated: 2016/10/28 13:00:18 by dle-blon         ###   ########.fr       */
+/*   Updated: 2016/12/12 14:24:24 by dle-blon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@
 
 typedef struct	s_data
 {
-	int		nb;
-	int		nbf;
-	char	**names;
+	int		nb_dir;
+	char	**dir;
+	int		nb_files;
 	char	**files;
-	char	*option;
+	char	*options;
 }				t_data;
 
 typedef struct	dirent	t_dir;

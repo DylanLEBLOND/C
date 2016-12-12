@@ -6,7 +6,7 @@
 /*   By: dle-blon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 18:46:20 by dle-blon          #+#    #+#             */
-/*   Updated: 2016/10/28 17:37:47 by dle-blon         ###   ########.fr       */
+/*   Updated: 2016/12/12 14:30:47 by dle-blon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		main(int ac, char **av)
 	t_data	*data;
 
 	i = 1;
-	data = (t_data *)ft_memset(data, 0, sizeof (t_data));
+	data = (t_data *)ft_memset(data, 0, sizeof(t_data));
 	ft_init(data, ac + 1);
 	while (i <= ac - 1)
 	{
