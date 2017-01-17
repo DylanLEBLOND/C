@@ -16,6 +16,7 @@
 	ps = push
 	psm = push origin master
 	psn = push origin next
+	b = branch
 [push]
 	default = upstream
 [user]
@@ -24,5 +25,5 @@
 [credential]
 	helper = cache
 [core]
-	excludesfile = /home/Dylan/.gitignore_global
+	excludesfile = ~/.gitignore
 	editor = emacs

@@ -1,0 +1,24 @@
+# eclipse
+.metadata
+.recommenders
+.settings
+.classpath
+.project
+.gitignore
+.cproject
+
+# C/C++
+*.o
+*.slo
+*.lo
+*.so
+*.so.*
+*.dylib
+*.lai
+*.la
+*.a
+*.lib
+*.dll
+*.exe
+*.out
+*.app
